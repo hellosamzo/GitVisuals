@@ -19,6 +19,10 @@ func stats(email string) {
 	print("stats")
 }
 
+func recursiveScanFolder(dir string) []string {
+	return scanGitDirectories(make([]string, 0), dir)
+}
+
 // scan for git directories
 func scanGitDirectories(directories []string, dir string) []string {
 	dir = strings.TrimSuffix(dir, "/")
