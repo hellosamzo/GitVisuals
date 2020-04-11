@@ -6,13 +6,56 @@ import (
 
 // scan a path and its children directories
 // search for git repos
-func scan(path string) {
-	print("scan func")
+func scan(dir string) {
+	fmt.Printf("Found dirs:\n\n")
+	repos = := recursiveScanFolder(dir)
+	filePath := getDotFilePath()
+	addNewSliceElementsToFile(filePath, repos)
+	fmt.Printf("n\nSuccessfully added\n\n")
 }
 
 // stats of commits etc
 func stats(email string) {
 	print("stats")
+}
+
+// scan for git directories
+func scanGitDirectories(directories []string, dir string) []string {
+	dir = strings.TrimSuffix(dir, "/")
+
+	f, err := os.Open(dir)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	files, err := f.Readdir(-1)
+	f.Close()
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var path string
+
+	for _, file := range files {
+        if file.IsDir() {
+            path = dir + "/" + file.Name()
+            if file.Name() == ".git" {
+                path = strings.TrimSuffix(path, "/.git")
+                fmt.Println(path)
+                folders = append(directories, path)
+                continue
+            }
+            if file.Name() == "vendor" || file.Name() == "node_modules" {
+                continue
+            }
+            folders = scanGitFolders(directories, path)
+        }
+	}
+	
+	return directories
+
 }
 
 func main() {
