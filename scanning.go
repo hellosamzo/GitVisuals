@@ -1,13 +1,10 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"io"
 	"io/ioutil"
 	"log"
 	"os"
-	"os/user"
 	"strings"
 )
 
@@ -65,12 +62,13 @@ func scanGitDirectories(directories []string, dir string) []string {
 }
 
 func getDotFilePath() string {
-	usr, err := user.Current()
-	if err != nil {
-		log.Fatal(err)
-	}
+	//usr, err := user.Current()
+	//if err != nil {
+	//		log.Fatal(err)
+	//}/
 
-	dotFile := usr.HomeDir + "/.gogitlocalstats"
+	//dotFile := usr.HomeDir + "/.gogitlocalstats"
+	dotFile := "C:/tmp/.gogitlocalstats"
 
 	return dotFile
 }
@@ -82,27 +80,29 @@ func addNewSliceElementsToFile(filePath string, newRepos []string) {
 }
 
 func fileLinesToSlice(filePath string) []string {
-	f := openFile(filePath)
-	defer f.Close()
-
+	//	f := openFile(filePath)
+	//	defer f.Close()/
+	//	print(filePath)
+	//	var lines []string
+	//	scanner := bufio.NewScanner(f)
+	//	for scanner.Scan() {
+	//		lines = append(lines, scanner.Text())
+	//	}
+	//
+	//	if err := scanner.Err(); err != nil {
+	//		if err != io.EOF {
+	//			print("here\n")
+	//			panic(err)
+	//		}
+	//	}
 	var lines []string
-	scanner := bufio.NewScanner(f)
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-
-	if err := scanner.Err(); err != nil {
-		if err != io.EOF {
-			panic(err)
-		}
-	}
-
+	lines = append(lines, "C:/Users/User/Documents/Projects/MovieHelper/MovieHelper")
 	return lines
 }
 
 // opens the file in filePath and creates it if null
 func openFile(filePath string) *os.File {
-	f, err := os.OpenFile(filePath, os.O_APPEND|os.O_WRONLY, 0755)
+	f, err := os.OpenFile(filePath, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0755)
 	if err != nil {
 		if os.IsNotExist(err) {
 			// file does not exist
