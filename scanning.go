@@ -79,6 +79,7 @@ func addNewSliceElementsToFile(filePath string, newRepos []string) {
 	dumpStringsSliceToFile(repos, filePath)
 }
 
+// TODO: find out why scanner is getting access denied/fix
 func fileLinesToSlice(filePath string) []string {
 	//	f := openFile(filePath)
 	//	defer f.Close()/

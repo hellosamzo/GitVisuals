@@ -218,12 +218,20 @@ func printMonths() {
 func printDayCol(day int) {
 	out := "     "
 	switch day {
+	case 0:
+		out = " Sun "
 	case 1:
 		out = " Mon "
+	case 2:
+		out = " Tue "
 	case 3:
 		out = " Wed "
+	case 4:
+		out = " Thu "
 	case 5:
 		out = " Fri "
+		//case 6:
+		// out = " Sat "
 	}
 
 	fmt.Printf(out)
@@ -232,7 +240,7 @@ func printDayCol(day int) {
 // printCell given a cell value prints it with a different format
 // based on the value amount, and on the `today` flag.
 func printCell(val int, today bool) {
-	escape := "\033[0;37;30m"
+	escape := "\033[0;37;31m"
 	switch {
 	case val > 0 && val < 5:
 		escape = "\033[1;30;47m"

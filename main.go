@@ -18,10 +18,8 @@ func main() {
 	}
 
 	var email string = viper.GetString("email")
-	//var githubRepos = viper.GetStringMap("githubRepos")
+	var dir string = viper.GetString("githubRepos")
 
-	print(email)
-	var dir string
 	flag.StringVar(&dir, "add", "", "add a new directory to scan for Git repositories")
 	flag.StringVar(&email, "email", email, "the email to scan")
 	flag.Parse()
