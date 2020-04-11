@@ -73,6 +73,17 @@ func getDotFilePath() string {
 	return dotFile
 }
 
+func addNewSliceElementsToFile(filePath string, newRepos []string) {
+	existingRepos := fileLinesToSlice(filePath)
+	repos := joinSlices(newRepos, existingRepos)
+	dumpStringsSliceToFile(repos, filePath)
+}
+
+func fileLinesToSlice(filePath string) []string {
+	f := openFile(filePath)
+	defer f.close()
+}
+
 func main() {
 	var dir string
 	var email string
