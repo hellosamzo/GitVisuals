@@ -62,6 +62,17 @@ func scanGitDirectories(directories []string, dir string) []string {
 
 }
 
+func getDotFilePath() string {
+	usr, err := user.Current()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	dotFile := usr.HomeDir + "/.gogitlocalstats"
+
+	return dotFile
+}
+
 func main() {
 	var dir string
 	var email string
