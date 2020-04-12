@@ -97,7 +97,7 @@ func fileLinesToSlice(filePath string) []string {
 	//		}
 	//	}
 	var lines []string
-	lines = append(lines, "C:/Users/User/Documents/Projects/MovieHelper/MovieHelper")
+	lines = append(lines, "C:/Users/User/Documents/Projects/GitVisuals")
 	return lines
 }
 

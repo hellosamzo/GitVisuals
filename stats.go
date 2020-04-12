@@ -176,7 +176,8 @@ func printCells(cols map[int]column) {
 			}
 			if col, ok := cols[i]; ok {
 				//special case today
-				if i == 0 && j == calcOffset()-1 {
+				//if i == 0 && j == calcOffset()-1 { <- this is causing a index out of range error
+				if i == 0 && j == calcOffset() {
 					printCell(col[j], true)
 					continue
 				} else {
@@ -211,6 +212,7 @@ func printMonths() {
 			break
 		}
 	}
+	fmt.Printf("\n")
 }
 
 // printDayCol given the day number (0 is Sunday) prints the day name,
@@ -218,6 +220,8 @@ func printMonths() {
 func printDayCol(day int) {
 	out := "     "
 	switch day {
+	case 6:
+		out = " Sat "
 	case 0:
 		out = " Sun "
 	case 1:
@@ -230,8 +234,6 @@ func printDayCol(day int) {
 		out = " Thu "
 	case 5:
 		out = " Fri "
-		//case 6:
-		// out = " Sat "
 	}
 
 	fmt.Printf(out)
