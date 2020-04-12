@@ -221,19 +221,19 @@ func printDayCol(day int) {
 	out := "     "
 	switch day {
 	case 6:
-		out = " Sat "
+		out = " Mon "
 	case 0:
 		out = " Sun "
 	case 1:
-		out = " Mon "
+		out = " Sat "
 	case 2:
-		out = " Tue "
-	case 3:
-		out = " Wed "
-	case 4:
-		out = " Thu "
-	case 5:
 		out = " Fri "
+	case 3:
+		out = " Thu "
+	case 4:
+		out = " Wed "
+	case 5:
+		out = " Tue "
 	}
 
 	fmt.Printf(out)
