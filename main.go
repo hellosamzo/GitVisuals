@@ -4,17 +4,32 @@ import (
 	"flag"
 	"fmt"
 
+	"github.com/manifoldco/promptui"
 	"github.com/spf13/viper"
 )
 
 func main() {
+	prompt := promptui.Select{
+		Label: "Select Data Type",
+		Items: []string{"Day Count", "ASCII Graph"},
+	}
+
+	_, result, err := prompt.Run()
+
+	if err != nil {
+		fmt.Printf("Prompt failed %v\n", err)
+		return
+	}
+
+	fmt.Printf("Displaying: %q\n", result)
+
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")
 	viper.AddConfigPath(".")
-	err := viper.ReadInConfig() // Find and read the config file
+	errz := viper.ReadInConfig() // Find and read the config file
 
-	if err != nil { // Handle errors reading the config file
-		panic(fmt.Errorf("Fatal error config file: %s", err))
+	if errz != nil { // Handle errors reading the config file
+		panic(fmt.Errorf("Fatal error config file: %s", errz))
 	}
 
 	var email string = viper.GetString("email")
