@@ -23,26 +23,31 @@ func main() {
 
 	fmt.Printf("Displaying: %q\n", result)
 
-	viper.SetConfigName("config")
-	viper.SetConfigType("yaml")
-	viper.AddConfigPath(".")
-	errz := viper.ReadInConfig() // Find and read the config file
+	if result == "Day Count" {
 
-	if errz != nil { // Handle errors reading the config file
-		panic(fmt.Errorf("Fatal error config file: %s", errz))
+		viper.SetConfigName("config")
+		viper.SetConfigType("yaml")
+		viper.AddConfigPath(".")
+		errz := viper.ReadInConfig() // Find and read the config file
+
+		if errz != nil { // Handle errors reading the config file
+			panic(fmt.Errorf("Fatal error config file: %s", errz))
+		}
+
+		var email string = viper.GetString("email")
+		var dir string = viper.GetString("githubRepos")
+
+		flag.StringVar(&dir, "add", "", "add a new directory to scan for Git repositories")
+		flag.StringVar(&email, "email", email, "the email to scan")
+		flag.Parse()
+
+		if dir != "" {
+			scan(dir)
+			return
+		}
+
+		stats(email)
+	} else if result == "ASCII Graph" {
+		fmt.Printf("insert ASCII Graph here")
 	}
-
-	var email string = viper.GetString("email")
-	var dir string = viper.GetString("githubRepos")
-
-	flag.StringVar(&dir, "add", "", "add a new directory to scan for Git repositories")
-	flag.StringVar(&email, "email", email, "the email to scan")
-	flag.Parse()
-
-	if dir != "" {
-		scan(dir)
-		return
-	}
-
-	stats(email)
 }
